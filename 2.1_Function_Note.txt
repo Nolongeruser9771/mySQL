@@ -1,0 +1,26 @@
+1. PRIMARY KEY, AUTO_INCREMENT, UNIQUE (Dùng khai báo phía sau tên trường)
+	- PRIMARY KEY: Khóa chính, không trùng lặp
+	- AUTO_INCREMENT: Tự tăng (thường dùng cho id)
+	- UNIQUE: Gía trị duy nhất, không trùng lặp
+
+2. 1 BẢNG DÙNG NHIỀU LẦN: 
+	e.g: Cho bảng Person, hiển thị các cá nhân có email không trùng nhau.
+		Nếu id trùng nhau thì lấy cá nhân có id nhỏ hơn.
+
+	Để check email trùng nhau không thì phải sử dụng bảng Person 2 lần
+	Coi như Person p1, Person p2.
+
+	SELECT Person p1, Person p2 FROM Person
+	WHERE p1.email = p2.email AND p1.id<p2.id;
+
+3. FUNCTION()
+	- DATEDIFF: Tính khoảng thời gian giữa 2 mốc thời gian
+		e.g: DATEDIFF('2023-02-17', 2023-02-16) -> return 1 day
+	- %: Phép chia lấy dư
+		e.g: 5 % 3 = 2 (5 chia 3 dư 2)
+	- CONCAT: Phép cộng chuỗi
+		e.g: CONCAT('Nguyên',' Nguyễn') -> return 'Nguyên Nguyễn'
+	- SET @variable = value: cách khai báo biến
+		e.g: SET @loveMe = 'no'; (Khai báo biến 'loveMe' có giá trị init = 'no');
+	- IF : Hàm điều kiện
+		e.g: IF(@loveMe ='no','break my heart', 'love you too');
