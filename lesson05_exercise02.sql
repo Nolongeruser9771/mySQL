@@ -10,10 +10,11 @@ CREATE TABLE account(
 );
 
 CREATE TABLE address(
-	id INT UNIQUE,
+	id INT PRIMARY KEY auto_increment,
 	address VARCHAR(200),
 	created_date DATETIME,
-	FOREIGN KEY(id) REFERENCES account(id)
+	account_id INT UNIQUE,
+	FOREIGN KEY(account_id) REFERENCES account(id)
 );
 
 /*1b. Thêm mỗi bảng 10 bản ghi*/
@@ -33,22 +34,22 @@ VALUES
 
 INSERT INTO address
 VALUES
-(1,'Giang Tây, TQ', '2023-02-22'),
-(2,'Giang Đông, TQ', '2023-02-22'),
-(3,'Bắc Kinh, TQ', '2023-02-22'),
-(4,'Thượng Hải, TQ', '2023-02-22'),
-(5,'Vân Nam, TQ', '2023-02-22'),
-(6,'Trùng Khánh, TQ', '2023-02-22'),
-(7,'Quảng Đông, TQ', '2023-02-22'),
-(8,'Hồng Kông', '2023-02-22'),
-(9,'Đài Loan', '2023-02-22'),
-(10,'Tây Tạng', '2023-02-22');
+(1,'Giang Tây, TQ', '2023-02-22',2),
+(2,'Giang Đông, TQ', '2023-02-22',3),
+(3,'Bắc Kinh, TQ', '2023-02-22',5),
+(4,'Thượng Hải, TQ', '2023-02-22',4),
+(5,'Vân Nam, TQ', '2023-02-22',1),
+(6,'Trùng Khánh, TQ', '2023-02-22',6),
+(7,'Quảng Đông, TQ', '2023-02-22',8),
+(8,'Hồng Kông', '2023-02-22',7),
+(9,'Đài Loan', '2023-02-22',10),
+(10,'Tây Tạng', '2023-02-22',9);
 
 /*1c.Truy vấn cột*/
 
 SELECT account.id, account.username, account.full_name, account.phone, account.email, account.created_date, address.address
-FROM account LEFT JOIN address
-ON account.id = address.id;
+FROM account JOIN address
+ON account.id = address.account_id;
 
 /*2a. Xóa bảng. Tạo lại 2 bảng quan hệ 1-N*/
 DROP TABLE account, address;
@@ -63,10 +64,11 @@ CREATE TABLE account(
 );
 
 CREATE TABLE address(
-	id INT,
+	id INT PRIMARY KEY auto_increment,
 	address VARCHAR(200),
 	created_date DATETIME,
-	FOREIGN KEY(id) REFERENCES account(id)
+	account_id INT,
+	FOREIGN KEY(account_id) REFERENCES account(id)
 );
 
 /*2b. Thêm mỗi bảng 10 bản ghi*/
@@ -86,20 +88,20 @@ VALUES
 
 INSERT INTO address
 VALUES
-(1,'Giang Tây, TQ', '2023-02-22'),
-(2,'Giang Đông, TQ', '2023-02-22'),
-(2,'Bắc Kinh, TQ', '2023-02-22'),
-(4,'Thượng Hải, TQ', '2023-02-22'),
-(5,'Vân Nam, TQ', '2023-02-22'),
-(4,'Trùng Khánh, TQ', '2023-02-22'),
-(7,'Quảng Đông, TQ', '2023-02-22'),
-(8,'Hồng Kông', '2023-02-22'),
-(9,'Đài Loan', '2023-02-22'),
-(10,'Tây Tạng', '2023-02-22');
+(1,'Giang Tây, TQ', '2023-02-22',2),
+(2,'Giang Đông, TQ', '2023-02-22',3),
+(3,'Bắc Kinh, TQ', '2023-02-22',2),
+(4,'Thượng Hải, TQ', '2023-02-22',1),
+(5,'Vân Nam, TQ', '2023-02-22',1),
+(6,'Trùng Khánh, TQ', '2023-02-22',4),
+(7,'Quảng Đông, TQ', '2023-02-22',5),
+(8,'Hồng Kông', '2023-02-22',6),
+(9,'Đài Loan', '2023-02-22',4),
+(10,'Tây Tạng', '2023-02-22',2);
 
 /*2c. Truy vấn cột*/
 
 SELECT account.id, account.username, account.full_name, account.phone, account.email, account.created_date, address.address
-FROM account left JOIN address
-ON account.id = address.id;
+FROM account JOIN address
+ON account.id = address.account_id;
 
